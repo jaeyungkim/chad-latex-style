@@ -33,7 +33,8 @@
 %\definecolor{ChadGreen}{rgb}{0,.35,.1}
 %\definecolor{ChadGreen}{rgb}{0,.5,.25}  % Too bright
 %\definecolor{ChadGreen}{rgb}{0,.4,.2}    % Still too bright
-\definecolor{ChadGreen}{rgb}{0,.4,0}    % Dark Green
+\
+definecolor{ChadGreen}{rgb}{0,.4,0}    % Dark Green
 %\definecolor{ChadRed}{rgb}{.8,.1,.2}    % Too bright
 \definecolor{ChadRed}{rgb}{.3,0,.7}  % purple .5,0,.5
 
@@ -225,3 +226,20 @@
 
 \newcommand{\pfrac}[2]{\left( \frac{#1}{#2} \right)}  % frac with large paren
 \newcommand{\chad}[1]{\textbf{\color{red}{ZZZ Chad Comment: #1}}}
+
+
+% Override colours for title, abstract, headings, and running heads to black
+\renewcommand{\title}[1]{\LaTeXtitle{\LARGE #1}}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+
+% Remove colour from section and subsection headings
+\let\LaTeX@@startsection\@startsection
+\renewcommand{\@startsection}[6]{\LaTeX@@startsection{#1}{#2}{#3}{#4}{#5}{\raggedright #6}}
+
+% Use black text in running heads instead of coloured
+\renewcommand{\runningheads}[2]{%
+   \chead[{\uppercase{\footnotesize #1}}]  % Author page header
+   {{\uppercase{\footnotesize #2}}}  % Short title
+}
