@@ -185,7 +185,8 @@
 % Use black for the running heads (author name and short title) instead of
 % the previous ChadGreen.  This ensures consistency with the rest of the
 % document and avoids coloured headers in print.
-\newcommand{\runningheads}[2]{
+% Override any existing definition of \runningheads to remove colour.
+\renewcommand{\runningheads}[2]{
    \chead[{\uppercase{\footnotesize #1}}]  % Author page header
    {{\uppercase{\footnotesize #2}}}  % Short title
   }
