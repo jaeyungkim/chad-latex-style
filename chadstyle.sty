@@ -7,8 +7,6 @@
 
 \special{papersize=8.5in,11in}
 %\usepackage{palatino,amssymb,amsfonts,amsmath,latexsym,setspace}
-% Use Utopia for text and load basic math packages.  When overriding fonts below we
-% will load additional packages.
 \usepackage{utopia,amssymb,amsfonts,amsmath,latexsym,setspace}
 \usepackage[dvips]{graphicx}
 \usepackage{natbib,fancyhdr}
@@ -49,54 +47,6 @@
          ]{hyperref}
 \usepackage[figure,table]{hypcap} % Correct a problem with hyperref
 \urlstyle{rm} %so it doesn't use a typewriter font for url's.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Modern font enhancements inspired by Pascal Michaillat's latex-paper template.
-%  These packages improve the appearance of mathematics and provide high‑quality
-%  serif and monospace fonts.  The math fonts in latex-paper are widely
-%  regarded as easier to read on screen and in print compared with the default
-%  Computer Modern or Utopia math.  Feel free to remove or adjust these lines
-%  if you prefer the original chadstyle fonts.
-%
-
-% Use T1 encoding so accented characters are rendered properly and searchable
-\usepackage[T1]{fontenc}
-
-% Source Serif Pro for the main text font and Source Code Pro for monospaced
-% sections (e.g. verbatim or code blocks).  Both fonts pair well together.
-\usepackage{sourceserifpro}
-\usepackage{sourcecodepro}
-
-% Improved math symbols and blackboard/alphabet fonts.  MnSymbol provides
-% alternative glyphs for common relations and operators, while mathalpha gives
-% calligraphic and blackboard bold alphabets (we choose Euler calligraphic and
-% Fourier blackboard styles).  Loading bm allows bold math symbols via \bm.
-\usepackage{MnSymbol}
-\usepackage[cal=euler,bb=fourier]{mathalpha}
-
-% Avoid “Too many math alphabets” warnings when combining multiple fonts
-\newcommand{\hmmax}{0}
-\newcommand{\bmmax}{0}
-\usepackage{bm}
-
-% Typeset Roman and Greek letters in math mode using the surrounding text
-% font.  The eulergreek option selects Euler shapes for Greek letters.  The
-% various `no...` options drop rarely used symbol variants to free up math
-% alphabet slots.  See the latex-paper project for details.
-\usepackage[italic,eulergreek,nolessnomore,noparenthesis,noplusnominus,noequal,nohbar]{mathastext}
-
-% Enable microtypographic extensions for better justification and kerning.
-% Although not strictly required, this package enhances the overall quality of
-% typeset documents.  It is widely recommended for modern LaTeX documents.
-\usepackage{microtype}
-
-% Adjust kerning around certain Roman letters in math mode for a more polished
-% appearance.  These commands come from the latex-paper template.
-\MTsetmathskips{f}{3mu}{0mu}
-\MTsetmathskips{y}{2mu}{0mu}
-\MTsetmathskips{p}{2mu}{0mu}
-\MTsetmathskips{j}{2mu}{0mu}
 
 %%%%%%%%%%%%%%%%%%%%%
 
@@ -160,9 +110,9 @@
 \cfoot[]{} 
 \renewcommand{\headrulewidth}{0pt}
 
-\newcommand{\runningheads}[2]{
-   \chead[\color{ChadGreen}{\uppercase {\footnotesize #1}}]  % Author page header
-   {\color{ChadGreen}{\uppercase {\footnotesize #2}}}  % Short title
+\newcommand{\runningheads}[2]{%
+   % Override running heads to use black text and no color
+   \chead[{\uppercase {\footnotesize #1}}]{{\uppercase {\footnotesize #2}}}%
   }
 
 % Make hyperlinks jump more accurately
@@ -225,20 +175,28 @@
 
 \newcommand{\pfrac}[2]{\left( \frac{#1}{#2} \right)}  % frac with large paren
 \newcommand{\chad}[1]{\textbf{\color{red}{ZZZ Chad Comment: #1}}}
-
-
-% Override colours for title, abstract, headings, and running heads to black
+% ================================================================================
+% Agent overrides to remove colours from structural elements and hyperlinks.
+% These come last to override prior definitions.
+% ================================================================================
+% Use a black title, abstract, figure and table names.
 \renewcommand{\title}[1]{\LaTeXtitle{\LARGE #1}}
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\figurename}{Figure}
 \renewcommand{\tablename}{Table}
 
-% Remove colour from section and subsection headings
-\let\LaTeX@@startsection\@startsection
-\renewcommand{\@startsection}[6]{\LaTeX@@startsection{#1}{#2}{#3}{#4}{#5}{\raggedright #6}}
-
-% Use black text in running heads instead of coloured
-\renewcommand{\runningheads}[2]{%
-   \chead[{\uppercase{\footnotesize #1}}]  % Author page header
-   {{\uppercase{\footnotesize #2}}}  % Short title
+% Remove colour from section and subsection headings by redefining \@startsection.
+\makeatletter
+\let\LaTeX@startsection\@startsection
+\renewcommand{\@startsection}[6]{%
+  \LaTeX@startsection{#1}{#2}{#3}{#4}{#5}{\raggedright #6}%
 }
+\makeatother
+
+% Ensure external hyperlinks (such as email or url) appear in black
+\makeatletter
+\AtBeginDocument{%
+  \let\orig@href\href
+  \renewcommand{\href}[2]{\orig@href{##1}{\textcolor{black}{##2}}}%
+}
+\makeatother
