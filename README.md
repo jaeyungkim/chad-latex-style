@@ -14,19 +14,15 @@ The key files are:
 
 ### Optional Improvements
 
-While the original style dates back to 2008, it still compiles cleanly with modern TeX engines.  If you wish to modernise further, consider the following:
+While the original style dates back to 2008, it still compiles cleanly with modern TeX engines.  In this repository we have **already incorporated a number of modernisations** inspired by Pascal Michaillat’s [latex‑paper](https://github.com/pmichaillat/latex-paper) template.  Notably:
 
-* Load the [`microtype`](https://ctan.org/pkg/microtype) package to improve justification and kerning:
+* **Improved fonts:** the main text is set in [Source Serif Pro](https://github.com/adobe-fonts/source-serif), the monospaced font is [Source Code Pro](https://github.com/adobe-fonts/source-code-pro), and the mathematics are typeset using a combination of `MnSymbol`, `mathalpha` (Euler calligraphic and Fourier blackboard bold), `bm` and `mathastext`.  These choices yield crisper symbols and a more harmonious look between text and maths.  If you prefer the original Utopia look, you can comment out the font‑related lines in `chadstyle.sty`.
 
-  ```latex
-  \usepackage{microtype}
-  ```
+* **Microtype enabled:** the [microtype](https://ctan.org/pkg/microtype) package is now loaded by default to improve kerning and justification.  You no longer need to add it manually.
 
-* Switch to a modern font.  `chadstyle.sty` currently loads **Utopia**; you can experiment with other choices (e.g. `libertine` or `times`), but be aware that font changes can affect spacing.
+* **Automatic compilation:** for convenience you can still use `latexmk` or `arara` to automate compilation; a sample `latexmkrc` could be added if desired.
 
-* Use `latexmk` or `arara` for automatic compilation.  A sample `latexmkrc` can be added if desired.
-
-These are optional; the provided files work out of the box with standard `pdflatex`.
+These enhancements should work out of the box with standard `pdflatex`.  Feel free to customise further or revert to the original settings by editing `chadstyle.sty`.
 
 ## Usage
 
