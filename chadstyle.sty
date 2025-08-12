@@ -117,8 +117,8 @@
 % elements to reduce distraction and improve legibility on paper.  These
 % redefinitions preserve the sizing from the original but drop the color
 % commands so that the rendered text appears in the default (black) color.
-\renewcommand{\title}[1]{\LaTeXtitle{\LARGE \bfseries \#1}}
-\renewcommand{\abstractname}{Abstract}
+\renewcommand{\title}[1]{\LaTeXtitle{\LARGE \bfseries #1}}
+\renewcommand{\abstractname}{}
 \renewcommand{\figurename}{Figure}
 \renewcommand{\tablename}{Table}
 
@@ -268,3 +268,50 @@
 
 \newcommand{\pfrac}[2]{\left( \frac{#1}{#2} \right)}  % frac with large paren
 \newcommand{\chad}[1]{\textbf{\color{red}{ZZZ Chad Comment: #1}}}
+
+% ---- Format header and footer ----
+
+% % Customize headers and footers
+\usepackage{fancyhdr}
+
+% % Activate custom header and footer
+\pagestyle{fancy}
+
+% % Eliminate header line
+\renewcommand{\headrule}{}
+
+% % Clear header and footer
+% \fancyhf{}
+\fancypagestyle{plain}{\fancyhf{}}
+
+% % % Place centered page number at foot of regular pages
+% % \fancyfoot[C]{\thepage}
+
+% % Define custom commands with complex argument specifications
+\usepackage{xparse}
+
+% Place URL and publication information at foot of title page
+\NewDocumentCommand{\available}{o g}{%
+\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize%
+\IfValueT{#1}{Published in \emph{#1}\;\textbullet\;}%
+Available at \url{#2}}}}
+
+
+% ---- Format title page ----
+
+% Customize title, author, and date
+\usepackage{titling}
+
+% Format title
+\pretitle{\begin{center}\bfseries\Huge} 
+
+% Eliminate thanks mark
+\renewcommand{\tamark}{}
+\setlength{\thanksmarkwidth}{0em}
+\setlength{\thanksmargin}{0em}
+
+% Enable advanced programming features
+\usepackage{etoolbox}
+
+% Eliminate indentation in abstract
+\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}}
