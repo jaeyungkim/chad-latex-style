@@ -2,6 +2,13 @@
 \usepackage{chadstyle}  % Loads my formatting 
 %\usepackage{tweaklist}  % I use this package as well; you may need to download
 
+\fancypagestyle{titleonly}{%
+  \fancyhf{}  % Clear all headers and footers
+  \fancyfoot[C]{\color{gray}\footnotesize Available at \url{https://your-paper-url.com}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
 %% Shortcut commands
 \newcommand{\proptitle}[1]{\color{ChadBlue} \textnormal{(#1):}}
 \newtheorem{proposition}{\color{ChadGreen} Proposition}
@@ -22,7 +29,6 @@
 
 \begin{document}
 \bibliographystyle{aernobold}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE PAGE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,15 +37,19 @@
 \begin{spacing}{0.9}
 \begin{titlepage}
 
-\title{Title}
-\runningheads{Author Names}{short title}
 
-\author{\large \href{https://sites.google.com/view/jaeyungkim}{First Author, Second Author}
+
+\title{Title}
+% \runningheads{Author Names}{short title}
+
+\author{\large \href{https://sites.google.com/view/jaeyungkim}{First Author}, \href{https://secondauthor-website.com}{Second Author}
 \thanks{First Author: First University. Second Author: Second University. We thank colleagues for helpful comments and discussions. This work was supported by a grant [grant number]; another grant [grant number]; and a foundation.}}
+% \thanks{\phantom{.} \\ \centering \textcolor{gray}{Available at \url{https://your-paper-url.com}}}}
 
 \date{\large Month Year}
+\available{https://your-paper-url.com}  % This creates the gray footer
 \maketitle
-\thispagestyle{empty}
+\thispagestyle{titleonly}
 
 %\clearpage
 \vspace{-0.3in}
@@ -60,10 +70,13 @@ mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing e
 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 \end{abstract}
 
+
 \end{titlepage}
 \end{spacing}
 %\end{singlespacing}
 
+% Reset page numbering to start from 1 on the next page
+% \setcounter{page}{1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
