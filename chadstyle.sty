@@ -56,6 +56,47 @@
 \usepackage[figure,table]{hypcap} % Correct a problem with hyperref
 \urlstyle{rm} %so it doesn't use a typewriter font for url's.
 
+% ---------------------------------------------------------------------------
+% Title page customizations similar to Pascal Michaillat's latex-paper
+% template.  These commands remove indentation on the title page and provide
+% a macro for adding an optional publication notice and URL at the bottom of
+% the title page.  The \available command takes an optional argument for
+% the journal or venue where the paper appeared and a mandatory argument
+% specifying the URL where the paper is available.  When used before
+% \maketitle, it installs a page style on the title page that prints this
+% information in a small grey font centered at the bottom of the page.
+% Examples:
+%   \available{http://your-url.com}
+%   \available[Journal Name]{http://your-url.com}
+% See Pascal Michaillat's latex-paper project for inspiration.
+\usepackage{xparse}
+\usepackage{etoolbox} % for \AtBeginEnvironment and conditional tests
+
+% Remove indentation throughout the title page and ensure the title page uses
+% the plain page style (so that \available appears at the foot).
+\AtBeginEnvironment{titlepage}{%
+  \pagestyle{plain}%
+  \setlength{\parindent}{0pt}%
+}
+
+% Define \available with an optional publication and a mandatory URL.
+% The optional argument [#1] is the journal or venue; #2 is the URL.
+\NewDocumentCommand{\available}{o m}{%
+  % Define the footer on the plain page style.  We call \fancypagestyle
+  % inside this macro so that each call to \available installs a new
+  % footline reflecting its arguments.  Clearing the header and footers
+  % ensures no unwanted colours from other definitions remain.
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{%
+      \color{gray}\footnotesize%
+      \IfValueT{#1}{Published in \emph{#1};\ \textbullet\ }%
+      Available at \url{#2}%
+    }%
+  }%
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Modern font enhancements inspired by Pascal Michaillat's latex-paper template.
@@ -117,8 +158,8 @@
 % elements to reduce distraction and improve legibility on paper.  These
 % redefinitions preserve the sizing from the original but drop the color
 % commands so that the rendered text appears in the default (black) color.
-\renewcommand{\title}[1]{\LaTeXtitle{\LARGE \bfseries #1}}
-\renewcommand{\abstractname}{}
+\renewcommand{\title}[1]{\LaTeXtitle{\LARGE #1}}
+\renewcommand{\abstractname}{Abstract}
 \renewcommand{\figurename}{Figure}
 \renewcommand{\tablename}{Table}
 
@@ -268,50 +309,3 @@
 
 \newcommand{\pfrac}[2]{\left( \frac{#1}{#2} \right)}  % frac with large paren
 \newcommand{\chad}[1]{\textbf{\color{red}{ZZZ Chad Comment: #1}}}
-
-% ---- Format header and footer ----
-
-% % Customize headers and footers
-\usepackage{fancyhdr}
-
-% % Activate custom header and footer
-\pagestyle{fancy}
-
-% % Eliminate header line
-\renewcommand{\headrule}{}
-
-% % Clear header and footer
-% \fancyhf{}
-\fancypagestyle{plain}{\fancyhf{}}
-
-% % % Place centered page number at foot of regular pages
-% % \fancyfoot[C]{\thepage}
-
-% % Define custom commands with complex argument specifications
-\usepackage{xparse}
-
-% Place URL and publication information at foot of title page
-\NewDocumentCommand{\available}{o g}{%
-\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize%
-\IfValueT{#1}{Published in \emph{#1}\;\textbullet\;}%
-Available at \url{#2}}}}
-
-
-% ---- Format title page ----
-
-% Customize title, author, and date
-\usepackage{titling}
-
-% Format title
-\pretitle{\begin{center}\bfseries\Huge} 
-
-% Eliminate thanks mark
-\renewcommand{\tamark}{}
-\setlength{\thanksmarkwidth}{0em}
-\setlength{\thanksmargin}{0em}
-
-% Enable advanced programming features
-\usepackage{etoolbox}
-
-% Eliminate indentation in abstract
-\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}}
