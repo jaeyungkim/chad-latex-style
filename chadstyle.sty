@@ -41,12 +41,56 @@
      pdfstartview=Fit,  % for fitting entire page; FitW just fits width
      pdfview=Fit,       % after traversing a hyperlink
      linkcolor=ChadRed,
-     urlcolor=ChadGreen,
+     % Use a blue tone for external hyperlinks instead of green.  We later
+     % override the visible colour of external hyperlinks to black at the end
+     % of this style file (see the \href redefinition), but we still set
+     % urlcolor to ChadCiteColor here to avoid residual green boxes in PDF
+     % viewers that ignore the text colour override.  Choose ChadCiteColor
+     % (a dark blue) to match citations.
+     urlcolor=ChadCiteColor,
      citecolor=ChadCiteColor,
      hyperfootnotes=false
          ]{hyperref}
 \usepackage[figure,table]{hypcap} % Correct a problem with hyperref
 \urlstyle{rm} %so it doesn't use a typewriter font for url's.
+
+% ------------------------------------------------------------------------------
+% Modern font enhancements inspired by Pascal Michaillat's latex-paper template.
+% These packages improve the appearance of mathematics and provide high-quality
+% serif and monospace fonts. Feel free to remove or adjust these lines if you
+% prefer the original chadstyle fonts.
+
+% Use T1 encoding so accented characters are rendered properly and searchable
+\usepackage[T1]{fontenc}
+
+% Source Serif Pro for the main text font and Source Code Pro for monospaced
+% sections (e.g. verbatim or code blocks). Both fonts pair well together.
+\usepackage{sourceserifpro}
+\usepackage{sourcecodepro}
+
+% Improved math symbols and blackboard/Alphabet fonts. MnSymbol provides
+% alternative glyphs for common relations and operators, while mathalpha gives
+% calligraphic and blackboard bold alphabets. We choose Euler calligraphic and
+% Fourier blackboard glyphs. Loading bm allows bold math symbols via \bm.
+\usepackage{MnSymbol}
+\usepackage[cal=euler,bb=boondox]{mathalpha}
+\usepackage{bm}
+
+% Typeset Roman and Greek letters in math mode using the surrounding text
+% font. The eulergreek option selects Euler shapes for Greek letters. The
+% various 'no...' options are rarely used symbol variants to free up math
+% alphabet slots. See the latex-paper project for details.
+\usepackage[italic,eulergreek]{mathastext}
+
+% Enable microtypographic extensions for better justification and kerning.
+\usepackage{microtype}
+
+% Adjust kerning around certain Roman letters in math mode for a more polished
+% appearance. These commands come from the latex-paper template.
+\MTsetmathskips{f}{3mu}{0mu}
+\MTsetmathskips{y}{2mu}{0mu}
+\MTsetmathskips{p}{2mu}{0mu}
+\MTsetmathskips{j}{2mu}{0mu}
 
 %%%%%%%%%%%%%%%%%%%%%
 
