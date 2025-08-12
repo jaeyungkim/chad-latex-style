@@ -1,6 +1,6 @@
 # Chad & Pascal's Modern LaTeX Style
 
-This repository contains a collection of LaTeX style and support files that combines the best of two excellent academic paper templates: Charles I. Jones's original color LaTeX style and Pascal Michaillat's modern latex-paper enhancements. The package uses carefully chosen colours, hyperlinks throughout, modern typography, and sensible defaults for spacing to make academic papers more readable both on-screen and in print.
+This repository contains a collection of LaTeX style and support files that combines two excellent academic paper templates: Charles I. Jones's original color LaTeX style and Pascal Michaillat's modern latex-paper enhancements. The package uses carefully chosen colours, hyperlinks throughout, modern typography, and sensible defaults for spacing to make academic papers more readable both on-screen and in print.
 
 ## Contents
 
