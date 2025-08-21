@@ -9,8 +9,6 @@ The key files are:
 - **`chadstyle.sty`** – the main style file combining Chad's color scheme and layout with Pascal's modern font and typography enhancements.
 - **`aernobold.sty` / `aernobold.bst`** – style and bibliography files loosely based on the *American Economic Review* format, but with author names in normal weight instead of bold.
 - **`chadskeleton.tex`** – a minimal template demonstrating how to set up your document using the style. Start here when writing a new paper.
-- **`cost04b.tex`** and **`cost040.pdf`** – an example paper compiled with the style. The PDF shows how the colours and hyperlinks look when printed or displayed on screen.
-- **`.gitignore`** – ignores common LaTeX intermediate files such as `.aux`, `.log`, `.out`, etc.
 
 ### Combined Features
 
@@ -34,7 +32,7 @@ The result is a style that combines Chad's proven readability approach with Pasc
 1. **Clone or download this repository.** You can click the **Code** button on GitHub and choose *Download ZIP*, or clone it via git:
 
    ```bash
-   git clone https://github.com/<your_username>/chad-pascal-latex-style.git
+   git clone https://github.com/jaeyungkim/chad-pascal-latex-style.git
    ```
 
 2. **Write your paper.** Use `chadskeleton.tex` as a starting point. It sets up the combined color scheme and typography. Replace the title, author, abstract, and body with your content.
